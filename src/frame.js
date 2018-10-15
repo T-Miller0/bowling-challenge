@@ -23,13 +23,24 @@ Frame.prototype.isStrike = function(num) {
   return false
 };
 
-Frame.prototype.isSpare = function() {
-  if (this.rolls.length === 2) {
-    let total = this.rolls[0] + this.rolls[1]
-   if(total === this.maxPins) {
-    this.frameOver = true
+Frame.prototype.isFrameOver = function () {
+  if(this.rolls[0] === 10 || this.rolls.length === 2) {
     return true
   };
   return false
 };
+
+Frame.prototype.resetFrame = function () {
+  this.rolls = []
+  this.maxPins = 10
 };
+// Frame.prototype.isSpare = function() {
+//   if (this.rolls.length === 2) {
+//     let total = this.rolls[0] + this.rolls[1]
+//    if(total === this.maxPins) {
+//     this.frameOver = true
+//     return true
+//   };
+//   return false
+// };
+// };

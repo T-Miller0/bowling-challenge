@@ -28,17 +28,39 @@ describe('frame', function () {
       expect(frame.isStrike(4)).toEqual(false)
     });
   });
-  describe('spare', function() {
-    it('should return a spare', function() {
-      frame.addRoll(6)
-      frame.addRoll(4)
-      expect(frame.isSpare()).toEqual(true)
+  // describe('spare', function() {
+  //   it('should return a spare', function() {
+  //     frame.addRoll(6)
+  //     frame.addRoll(4)
+  //     expect(frame.isSpare()).toEqual(true)
+  //   });
+  //   it('false, is not a spare', function() {
+  //     frame.addRoll(6)
+  //     frame.addRoll(1)
+  //     expect(frame.isSpare()).toEqual(false)
+  //   });
+  // });
+
+  describe('is frame over', function() {
+    it('sends rolls at end of frame', function() {
+      frame.addRoll(10)
+      expect(frame.isFrameOver()).toEqual(true)
     });
-    it('false, is not a spare', function() {
-      frame.addRoll(6)
-      frame.addRoll(1)
-      expect(frame.isSpare()).toEqual(false)
+    it('sends off rolls if end of frame', function() {
+      frame.addRoll(5)
+      frame.addRoll(5)
+      expect(frame.isFrameOver()).toEqual(true)
+    });
+    it('frame continues', function() {
+      frame.addRoll(5)
+      expect(frame.isFrameOver()).toEqual(false)
     });
   });
-
+  describe('resetFrame', function() {
+    it('adds score to game', function() {
+      frame.resetFrame()
+      expect(frame.rolls).toEqual([]);
+      expect(frame.maxPins).toEqual(10);
+    });
+  });
 });
